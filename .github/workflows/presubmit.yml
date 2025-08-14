@@ -696,16 +696,16 @@ jobs:
         # Install Ninja only if it's the selected generator and it's not available.
         if [[ "${{matrix.GEN}}" == "Ninja Multi-Config" && ! `which ninja` ]]; then brew install ninja; fi &&
         # We need to provide an OpenCL driver for Intel CPU on mac
-        brew install pocl
+        brew install pocl openlibm
         POCL_INSTALL_PATH=$(brew --prefix pocl)
         echo "OCL_ICD_VENDORS=$POCL_INSTALL_PATH/etc/OpenCL/vendors" >> $GITHUB_ENV
         cmake --version
 
-    - name: Install samples dependencies
+    - name: Install Sample Dependencies (Homebrew)
       run: |
         brew install vulkan-loader
 
-    - name: Install dependencies (Homebrew)
+    - name: Install Optional SDK Dependencies (Homebrew)
       if: matrix.DEPS == 'system'
       run: brew install tclap glm glew sfml mesa-glu
 

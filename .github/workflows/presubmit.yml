@@ -698,7 +698,7 @@ jobs:
         # Install Ninja only if it's the selected generator and it's not available.
         if [[ "${{matrix.GEN}}" == "Ninja Multi-Config" && ! `which ninja` ]]; then brew install ninja; fi &&
         # We need to provide an OpenCL driver for Intel CPU on mac
-        brew install pocl openlibm
+        brew install pocl
         POCL_INSTALL_PATH=$(brew --prefix pocl)
         echo "OCL_ICD_VENDORS=$POCL_INSTALL_PATH/etc/OpenCL/vendors" >> $GITHUB_ENV
         # This is needed so PoCL can find system libraries with newer LLVM versions, see:

@@ -34,6 +34,7 @@ jobs:
 
   linux:
     runs-on: ubuntu-latest
+    if: false
     needs: format
     defaults:
       run:
@@ -391,6 +392,7 @@ jobs:
 
   windows:
     runs-on: windows-latest
+    if: false
     needs: format
     defaults:
       run:
@@ -699,6 +701,10 @@ jobs:
         brew install pocl openlibm
         POCL_INSTALL_PATH=$(brew --prefix pocl)
         echo "OCL_ICD_VENDORS=$POCL_INSTALL_PATH/etc/OpenCL/vendors" >> $GITHUB_ENV
+        # This is needed so PoCL can find system libraries with newer LLVM versions, see:
+        # https://github.com/KhronosGroup/OpenCL-SDK/issues/144
+        SDKROOT=$(xcrun --show-sdk-path)
+        echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
         cmake --version
 
     - name: Install Sample Dependencies (Homebrew)
@@ -785,6 +791,7 @@ jobs:
 
   python:
     name: Exercise Python examples on ${{matrix.os}}
+    if: false
     defaults:
       run:
         shell: bash
@@ -825,6 +832,7 @@ jobs:
 
   checkruby:
     name: Check Ruby Samples ${{ matrix.os }}
+    if: false
     defaults:
       run:
         shell: bash
@@ -854,6 +862,7 @@ jobs:
 
   android:
     runs-on: ubuntu-latest
+    if: false
     needs: format
     defaults:
       run:

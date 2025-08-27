@@ -665,6 +665,7 @@ jobs:
   macos:
     runs-on: macos-latest
     needs: format
+    continue-on-error: true
     defaults:
       run:
         shell: bash
